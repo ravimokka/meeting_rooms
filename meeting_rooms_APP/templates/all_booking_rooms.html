@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MeetingRoomsApp</title>
+    {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static '/css/cssStyles.css' %}">
+         <script src="{% static '/js/all_booking.js' %}"></script>
+</head>
+<style type="text/css">
+</style>
+
+
+  <body style="background-color:#b3f3fc">
+     <div class="container-fluid">
+         <nav class="navbar navbar-inverse">
+              <div class="container-fluid">
+<!--                <div class="navbar-header">-->
+<!--                  <a class="navbar-brand" href="#">WebSiteName</a>-->
+<!--                </div>-->
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#" onclick="window.location.href = '/homePageAPI'">Home Page</a></li>
+                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Meeting Rooms Info<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#" onclick="window.location.href = '/allBookingAPI';">All Booking Meeting Room Info</a></li>
+                      <li><a href="#" onclick="window.location.href = '/availableRoomsAPI';">Available Meeting Rooms</a></li>
+
+                    </ul>
+                  </li>
+<!--                  <li><a href="#">Page 2</a></li>-->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+<!--                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+                  <li id="btn_logout" ><a href="#" ><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+                </ul>
+              </div>
+         </nav>
+
+
+
+
+
+
+
+            <div class="test">
+<!--                        <img src="{% static '/images/m3.jpg' %}"  style="height: 300px;width:1270px;">-->
+<!--                        <div class="centered">meeting rooms for rent in chennai</div>-->
+            </div>
+
+                    <div class="row">
+                                    <table id="all_booking_table" class="table dt-responsive nowrap m-b-0" cellspacing="0">
+
+                                <thead>
+
+                                <tr>
+                                    <th width="10%" class="text-center"  style="text-align:center;font-size:large"> Sno  </th>
+                                    <th width="10%" class="text-center"  style="text-align:center;font-size:large">Name</th>
+                                    <th width="10%" class="text-center"  style="text-align:center;font-size:large">Phone</th>
+                                    <th width="10%" class="text-center"  style="text-align:center;font-size:large">Email ID</th>
+                                    <th width="10%" class="text-center"  style="text-align:center;font-size:large">Arrive</th>
+                                    <th width="10%" class="text-center"  style="text-align:center;font-size:large">Depart</th>
+                                </tr>
+                                </thead>
+                                <tbody class="all_booking_data">
+
+                                </tbody>
+                            </table>
+
+                            <div id="all_booking_template">
+                                <table class="all_booking_table-form-list">
+                                    <tr class="all_booking_table-row-form">
+                                        <td class="sno"  style="text-align:center;"></td>
+                                        <td class="name"  style="text-align:center;"></td>
+                                        <td class="phone"  style="text-align:center;"></td>
+                                        <td class="email"  style="text-align:center;"></td>
+                                        <td class="arrive"  style="text-align:center;"></td>
+                                        <td class="depart"  style="text-align:center;"></td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                    </div>
+
+
+         <!-- Booking Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Booking Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <label for="name">Name :</label>
+                          <input type="text" class="form-control" id="name" placeholder="Name">
+                      </div>
+
+                        <div class="form-group">
+                            <label for="email">Email ID :</label>
+                          <input type="email" class="form-control" id="email" placeholder="Email ID">
+                        </div>
+
+                        <div class="form-group">
+                               <label for="phone">Phone :</label>
+                          <input type="number" class="form-control" id="phone" placeholder="Phone">
+                        </div>
+                            <div class="form-group">
+                                 <label for="arrive">Arrive :</label>
+                              <input type="date" class="form-control" id="arrive" placeholder="Arrive">
+                            </div>
+                           <div class="form-group">
+                                <label for="depart">Depart :</label>
+                              <input type="date" class="form-control" id="depart" placeholder="Depart">
+                            </div>
+
+                          </div>
+                          <div class="modal-footer" id="btn_submit">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="btn_save">Submit</button>
+                          </div>
+                </div>
+              </div>
+            </div>
+
+
+
+         <!-- View Details Modal -->
+            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="viewModalLabel">View Room Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <div id="view_img"> </div>
+
+                      <div class="row">
+                                    <table id="viewTable" class="table dt-responsive nowrap m-b-0" cellspacing="0">
+
+                                <thead>
+
+                                <tr>
+                                    <th width="10%" class="text-center" id="view-room-sno" style="text-align:center;font-size:large"> Sno  </th>
+                                    <th width="10%" class="text-center" id="view-room-num" style="text-align:center;font-size:large">Room Status</th>
+                                    <th width="10%" class="text-center" id="view-room-booking" style="text-align:center;font-size:large">Room Number</th>
+                                    <th width="10%" class="text-center" id="view-room-details" style="text-align:center;font-size:large">Availability Seating</th>
+                                </tr>
+                                </thead>
+                                <tbody class="view_details_data">
+
+                                </tbody>
+                            </table>
+
+                            <div id="template_view">
+                                <table class="view_table-form-list">
+                                    <tr class="view_table-row-form">
+                                        <td class="sno"  style="text-align:center;"></td>
+                                        <td class="rStatus"  style="text-align:center;"></td>
+                                        <td class="rNum"  style="text-align:center;"></td>
+                                        <td class="num_seats"  style="text-align:center;"></td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                    </div>
+
+                      <div class="modal-footer" id="btn_cancel">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<!--                            <button type="button" class="btn btn-primary" id="btn_save">Submit</button>-->
+                          </div>
+                  </div>
+              </div>
+           </div>
+
+            </div>
+     </div>
+
+
+<div class="footer" style="background-color:#a0a7de;">
+      <p>@ Raveendra M @</p>
+    </div>
+
+
+  </body>
+
+</html>
+
+
+
